@@ -1,14 +1,14 @@
 import React from 'react';
 import { Text, View, Image, Linking } from 'react-native';
-import Card from './Card';
+import Card from './Card'
 import CardSection from './CardSection';
-import Button from './Button';
+import Button from './Button'
 
-const AlbumDetail = ({ album }) => {
-  const { title, artist, thumbnail_image, image, url } = album;
+const AlbumDetail=({album})=>{
+  const {title,artist, thumbnail_image, image, url} = album;
   const {
-    thumbnailStyle,
-    headerContentStyle,
+    thumbnailStyle, 
+    headerContentStyle, 
     thumbnailContainerStyle,
     headerTextStyle,
     imageStyle
@@ -18,9 +18,9 @@ const AlbumDetail = ({ album }) => {
     <Card>
       <CardSection>
         <View style={thumbnailContainerStyle}>
-          <Image
-            style={thumbnailStyle}
-            source={{ uri: thumbnail_image }}
+          <Image 
+          style={thumbnailStyle}
+          source={{uri: thumbnail_image}}
           />
         </View>
         <View style={headerContentStyle}>
@@ -30,44 +30,42 @@ const AlbumDetail = ({ album }) => {
       </CardSection>
 
       <CardSection>
-        <Image
-          style={imageStyle}
-          source={{ uri: image }}
-        />
+        <Image 
+        style={imageStyle}
+        source={{uri: image}} />
       </CardSection>
 
       <CardSection>
-        <Button onPress={() => Linking.openURL(url)}>
-          Buy Now
+        <Button onPress={()=> Linking.openURL(url)}>
+        Buy now
         </Button>
       </CardSection>
     </Card>
-  );
+    )
 };
 
-const styles = {
-  headerContentStyle: {
+const styles ={
+  headerContentStyle:{
     flexDirection: 'column',
-    justifyContent: 'space-around'
+    justifyContent:'space-around'
   },
-  headerTextStyle: {
+  headerTextStyle:{
     fontSize: 18
   },
   thumbnailStyle: {
-    height: 50,
-    width: 50
+    height:50,
+    width:50
   },
-  thumbnailContainerStyle: {
+  thumbnailContainerStyle:{
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 10,
-    marginRight: 10
+    marginLeft:10,
+    marginRight:10
   },
-  imageStyle: {
-    height: 300,
-    flex: 1,
-    width: null
+  imageStyle:{
+    height:300,
+    flex:1,
+    width:null
   }
-};
-
+}
 export default AlbumDetail;
