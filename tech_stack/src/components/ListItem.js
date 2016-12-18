@@ -12,10 +12,24 @@ import * as actions from '../actions';
 
 class ListItem extends Component {
   render() {
+    const { titleStyle } = styles;
 
+    return (
+      <CardSection>
+        <Text style={titleStyle}>
+          {this.props.library.title}
+        </Text>
+      </CardSection>
+    );
   }
 }
 
+const styles = {
+  titleStyle: {
+    fontSize: 18,
+    paddingLeft: 15
+  }
+};
 
 
-export default connect(mapStateToProps, actions)(ListItem);
+export default connect(null, actions)(ListItem);
