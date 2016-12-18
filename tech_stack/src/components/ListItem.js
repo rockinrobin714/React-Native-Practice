@@ -11,15 +11,32 @@ import * as actions from '../actions';
 
 
 class ListItem extends Component {
+  renderDescription() {
+    const { library, selectedLibraryId } = this.props;
+    if (library.id === selectedLibraryId) {
+      return (
+        <Text> {library.description}</Text>
+        )
+    }
+  }
+
   render() {
     const { titleStyle } = styles;
+    const { id, title } = this.props.library;
 
     return (
-      <CardSection>
-        <Text style={titleStyle}>
-          {this.props.library.title}
-        </Text>
-      </CardSection>
+      <TouchableWithoutFeedback
+        onPress={() => this.props.selectLibrary(id)}
+      >
+        <View>
+          <CardSection>
+            <Text style={titleStyle}>
+              {title}
+            </Text>
+          </CardSection>
+          {this.renderDescription()}
+        </View>
+      </TouchableWithoutFeedback>
     );
   }
 }
@@ -31,5 +48,8 @@ const styles = {
   }
 };
 
+const mapStateToProps = state => {
+  return { selectedLibraryId: state.selectedLibraryId };
+};
 
-export default connect(null, actions)(ListItem);
+export default connect(mapStateToProps, actions)(ListItem);
