@@ -9,7 +9,13 @@ class LoginForm extends Component {
   onEmailChange(text) {
     this.props.emailChanged(text);
   }
-
+  onPasswordChange(text) {
+    this.props.passwordChanged(text);
+  }
+  onButtonPress() {
+    const { email, password } = this.props;
+    this.props.loginUser({ email, password });
+  }
   render() {
     return (
       <Card>
@@ -18,6 +24,7 @@ class LoginForm extends Component {
             label="Email"
             placeholder='email@gmail.com'
             onChangeText={this.onEmailChange.bind(this)}
+            value={this.props.email}
           />
         </CardSection>
 
@@ -26,11 +33,17 @@ class LoginForm extends Component {
           secureTextEntry
           label="Password"
           placeholder="password"
+          onChangeText={this.onPasswordChange.bind(this)}
+          value={this.props.password}
           />
         </CardSection>
 
+        <Text style={styles.errorTextStyle}>
+          {this.props.error}
+        </Text>
+
         <CardSection>
-          <Button>
+          <Button onPress={this.onButtonPress.bind(this)}>
           Login
           </Button>
         </CardSection>
@@ -38,7 +51,18 @@ class LoginForm extends Component {
       );
   }
 }
+const styles = {
+  errorTextStyle: {
+    fontSize: 20,
+    alignSelf: 'center',
+    color: 'red'
+  }
+}
+const mapStateToProps = ({ auth }) => {
+  const { email, password, error } = auth;
+  return { email, password, error };
+};
 
-export default connect(null, {
+export default connect(mapStateToProps, {
   emailChanged, passwordChanged, loginUser
 })(LoginForm);
